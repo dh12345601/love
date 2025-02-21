@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To My Love</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #ffe6f2;
+            overflow: hidden;
+            font-family: 'Microsoft YaHei', cursive;
+        }
+
+        .container {
+            position: relative;
+            height: 100%;
+            background: linear-gradient(45deg, #ff99cc, #ff6699);
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff3366;
+            font-size: 20px;
+            animation: fall 3s linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        h1 {
+            color: #fff;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+
+        .love-letter {
+            display: none;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 18px;
+            background: #ff3366;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #ff1a4d;
+        }
+
+        .flowers {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 飘落爱心 -->
+        <div class="hearts"></div>
+        
+        <div class="content">
+            <h1❤️ 亲爱的 [馆陶县税务局] ❤️</h1>
+            <button onclick="showLetter()">点击查收情书</button>
+            <div id="letter" class="love-letter">
+                <p>在万千星辰中，我找到了最亮的那一颗<br>
+                在无数可能里，我遇见了最好的你<br>
+                你的笑容是我每天的阳光<br>
+                你的温柔是我永远的港湾<br>
+                往后余生，请多指教 ❤️</p>
+                <p style="text-align: right;">—— 爱你的 [你的名字]</p>
+                <p style="font-size:0.8em;color:#666">❤️ 长按屏幕有惊喜 ❤️</p>
+            </div>
+        </div>
+
+        <!-- 花朵装饰 -->
+        <div class="flowers" style="top:20%;left:10%">🌸</div>
+        <div class="flowers" style="top:30%;right:15%">🌺</div>
+    </div>
+
+    <script>
+        // 创建飘落爱心
+        function createHearts() {
+            const container = document.querySelector('.hearts');
+            for(let i=0; i<50; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 3 + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        // 显示情书
+        function showLetter() {
+            document.getElementById('letter').style.display = 'block';
+            document.querySelector('button').style.display = 'none';
+        }
+
+        // 长按特效
+        let timer;
+        document.addEventListener('mousedown', () => {
+            timer = setTimeout(() => {
+                document.body.style.background = '#ffccdd';
+                const fireworks = document.createElement('div');
+                fireworks.innerHTML = '🎆';
+                fireworks.style.position = 'absolute';
+                fireworks.style.left = event.clientX + 'px';
+                fireworks.style.top = event.clientY + 'px';
+                fireworks.style.fontSize = '50px';
+                document.body.appendChild(fireworks);
+                setTimeout(() => fireworks.remove(), 1000);
+            }, 1000);
+        });
+
+        document.addEventListener('mouseup', () => clearTimeout(timer));
+
+        // 初始化
+        createHearts();
+    </script>
+</body>
+</html>
